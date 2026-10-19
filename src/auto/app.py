@@ -1,23 +1,18 @@
-from selenium import webdriver
-from selenium.webdriver.common.by import By
 import time
 
-driver = webdriver.Chrome()
+from selenium.webdriver import Chrome
+from auto.pages import DiscoverPage
 
-driver.get("https://www.selenium.dev/selenium/web/web-form.html")
+BANDCAMP_DISCOVER_URL = "https://bandcamp.com/discover/"
+driver = Chrome()
+driver.get(BANDCAMP_DISCOVER_URL)
 
-title = driver.title
+page = DiscoverPage(driver)
 
-driver.implicitly_wait(0.5)
+track_1 = page.discover_tracklist.available_tracks[0]
+print(track_1)
+track_1.play()
+# track_1.pause()
 
-text_box = driver.find_element(by=By.NAME, value="my-text")
-submit_button = driver.find_element(by=By.CSS_SELECTOR, value="button")
-
-text_box.send_keys("Selenium")
-time.sleep(5)
-submit_button.click()
-
-message = driver.find_element(by=By.ID, value="message")
-text = message.text
-
-driver.quit()
+time.sleep(10)
+page._driver.quit()
