@@ -1,4 +1,4 @@
-# JobRadar
+# auto
 
 This is a learning project. Follow docs/python-roadmap.md phase by phase.
 
@@ -8,4 +8,5 @@ This is a learning project. Follow docs/python-roadmap.md phase by phase.
 - When a phase's "Done when" criteria are met, add a line under "Progress" below.
 
 ## Progress
+
 - Not started. Next: Phase 0.
