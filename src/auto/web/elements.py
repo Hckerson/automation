@@ -3,8 +3,8 @@ from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as EC
 
-from auto.base import WebComponent
-from auto.locators import TrackListLocator, TrackLocator
+from auto.web.base import Track, WebComponent
+from auto.web.locators import TrackListLocator, TrackLocator
 
 
 class TrackListElement(WebComponent):
@@ -57,7 +57,7 @@ class TrackElement(WebComponent):
     def _get_play_button(self) -> WebElement:
         return self._parent.find_element(*TrackLocator.PLAY_BUTTON)
 
-    def _get_track_info(self) -> dict:
+    def _get_track_info(self) -> Track:
         full_url = self._parent.find_element(*TrackLocator.URL).get_attribute("href")
 
         clean_url = full_url.split("?")[0] if full_url else ""
@@ -65,9 +65,10 @@ class TrackElement(WebComponent):
             genre = self._parent.find_element(*TrackLocator.GENRE).text
         except NoSuchElementException:
             genre = ""
-        return {
-            "genre": genre,
-            "url": clean_url,
-            "album": self._parent.find_element(*TrackLocator.ALBUM).text,
-            "artist": self._parent.find_element(*TrackLocator.ARTIST).text,
-        }
+            
+        return Track(
+            genre=genre,
+            url=clean_url,
+            album=self._parent.find_element(*TrackLocator.ALBUM).text,
+            artist=self._parent.find_element(*TrackLocator.ARTIST).text,
+        )

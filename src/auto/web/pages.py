@@ -1,9 +1,9 @@
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.remote.webdriver import WebDriver
 
-from auto.base import WebPage
-from auto.elements import TrackListElement
-from auto.locators import DiscoverPageLocator
+from auto.web.base import WebPage
+from auto.web.elements import TrackListElement
+from auto.web.locators import DiscoverPageLocator
 
 
 class DiscoverPage(WebPage):
